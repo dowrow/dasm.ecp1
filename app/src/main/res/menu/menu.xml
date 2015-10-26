@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".FicherosActivity"
+    >
+
+    <item
+        android:id="@+id/accionVaciar"
+        android:title="@string/opcionVaciar"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom|withText"
+        />
+    <item
+        android:id="@+id/accionAjustes"
+        android:title="@string/opcionAjustes"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom|withText"
+        />
+</menu>

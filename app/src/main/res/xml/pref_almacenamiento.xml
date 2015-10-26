@@ -1,0 +1,23 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:key="almacenamiento_sd"
+        android:title="@string/pref_title_almacenamiento_sd"
+        android:summary="@string/pref_description_almacenamiento_sd"
+        android:defaultValue="false"
+        />
+
+    <EditTextPreference
+        android:key="nombre_fichero"
+        android:title="@string/pref_title_nombre_fichero"
+        android:summary="@string/pref_description_nombre_fichero"
+        android:defaultValue="@string/pref_default_nombre_fichero"
+        android:selectAllOnFocus="false"
+        android:inputType="textNoSuggestions"
+        android:capitalize="none"
+        android:singleLine="true"
+        android:maxLines="1"
+        />
+
+</PreferenceScreen>
