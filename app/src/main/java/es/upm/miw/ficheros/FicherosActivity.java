@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -19,9 +20,15 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 
-public class FicherosActivity extends AppCompatActivity  implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class FicherosActivity extends AppCompatActivity {
+
+    private final String PREF_KEY_NOMBRE_FICHERO = "nombre_fichero";
+
+    private final String PREF_KEY_ALMACENAMIENTO_SD = "almacenamiento_sd";
 
     private String NOMBRE_FICHERO = "miFichero.txt";
+
+    private boolean almacenarSD = false;
 
     private String RUTA_FICHERO;         /** SD card **/
 
@@ -31,6 +38,13 @@ public class FicherosActivity extends AppCompatActivity  implements SharedPrefer
 
     TextView contenidoFichero;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        NOMBRE_FICHERO = prefs.getString(PREF_KEY_NOMBRE_FICHERO, NOMBRE_FICHERO);
+        almacenarSD = prefs.getBoolean(PREF_KEY_ALMACENAMIENTO_SD, almacenarSD);
+    }
 
     @Override
     protected void onStart() {
@@ -48,10 +62,6 @@ public class FicherosActivity extends AppCompatActivity  implements SharedPrefer
         botonAniadir     = (Button)   findViewById(R.id.botonAniadir);
         contenidoFichero = (TextView) findViewById(R.id.contenidoFichero);
 
-        /** SD card **/
-        RUTA_FICHERO = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + NOMBRE_FICHERO;
-        //RUTA_FICHERO = getExternalFilesDir(null) + "/" + NOMBRE_FICHERO;
-
     }
 
     /**
@@ -61,6 +71,13 @@ public class FicherosActivity extends AppCompatActivity  implements SharedPrefer
      * @param v Botón añadir
      */
     public void accionAniadir(View v) {
+
+        if (almacenarSD) {
+            RUTA_FICHERO = getExternalFilesDir(null) + "/" + NOMBRE_FICHERO;
+        } else {
+            RUTA_FICHERO = getExternalFilesDir(null) + "/" + NOMBRE_FICHERO;
+        }
+
         /** Comprobar estado SD card **/
         String estadoTarjetaSD = Environment.getExternalStorageState();
         try {  // Añadir al fichero
@@ -143,7 +160,7 @@ public class FicherosActivity extends AppCompatActivity  implements SharedPrefer
     }
 
     private void mostrarAjustes() {
-        Intent intent = new Intent(this, AjustesActivity.class);
+        Intent intent = new Intent(getApplicationContext(), AjustesActivity.class);
         startActivity(intent);
     }
 
@@ -168,9 +185,4 @@ public class FicherosActivity extends AppCompatActivity  implements SharedPrefer
         }
     }
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        //boolean almacenamientoSD = sharedPreferences.getBoolean("almacenamiento_sd", false);
-        //NOMBRE_FICHERO = sharedPreferences.getString("", "fichero-miw");
-    }
 }

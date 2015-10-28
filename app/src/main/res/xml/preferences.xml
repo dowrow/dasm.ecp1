@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:theme="@android:style/Theme.WithActionBar"
+    >
+
+    <PreferenceScreen
+        android:title="@string/pref_title_opciones_almacenamiento"
+        android:summary="@string/opcionAjustesResumen"
+        android:persistent="false">
+
+        <PreferenceCategory
+        android:title="@string/pref_title_opciones_almacenamiento">
+
+            <CheckBoxPreference
+                android:key="almacenamiento_sd"
+                android:summary="@string/pref_description_almacenamiento_sd"
+                android:title="@string/pref_title_almacenamiento_sd"
+                android:defaultValue="false"
+                />
+
+            <EditTextPreference
+                android:key="nombre_fichero"
+                android:title="@string/pref_title_nombre_fichero"
+                android:summary="@string/pref_description_nombre_fichero"
+                android:defaultValue="@string/pref_default_nombre_fichero"
+                android:inputType="textNoSuggestions"
+                android:selectAllOnFocus="false"
+                />
+
+        </PreferenceCategory>
+    </PreferenceScreen>
+</PreferenceScreen>
