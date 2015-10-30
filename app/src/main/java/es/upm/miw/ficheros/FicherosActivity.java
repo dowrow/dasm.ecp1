@@ -41,9 +41,18 @@ public class FicherosActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        updatePreferences();
+    }
+
+    private void updatePreferences() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         NOMBRE_FICHERO = prefs.getString(PREF_KEY_NOMBRE_FICHERO, NOMBRE_FICHERO);
         almacenarSD = prefs.getBoolean(PREF_KEY_ALMACENAMIENTO_SD, almacenarSD);
+        if (almacenarSD) {
+            RUTA_FICHERO = getExternalFilesDir(null) + "/" + NOMBRE_FICHERO;
+        } else {
+            RUTA_FICHERO = getFilesDir() + "/" + NOMBRE_FICHERO;
+        }
     }
 
     @Override
@@ -72,11 +81,7 @@ public class FicherosActivity extends AppCompatActivity {
      */
     public void accionAniadir(View v) {
 
-        if (almacenarSD) {
-            RUTA_FICHERO = getExternalFilesDir(null) + "/" + NOMBRE_FICHERO;
-        } else {
-            RUTA_FICHERO = getExternalFilesDir(null) + "/" + NOMBRE_FICHERO;
-        }
+        updatePreferences();
 
         /** Comprobar estado SD card **/
         String estadoTarjetaSD = Environment.getExternalStorageState();
@@ -104,9 +109,13 @@ public class FicherosActivity extends AppCompatActivity {
      * @param textviewContenidoFichero TextView contenido del fichero
      */
     public void mostrarContenido(View textviewContenidoFichero) {
+
+        updatePreferences();
+
         boolean hayContenido = false;
         File fichero = new File(RUTA_FICHERO);
         String estadoTarjetaSD = Environment.getExternalStorageState();
+
         contenidoFichero.setText("");
         try {
             if (fichero.exists() &&         /** SD card **/

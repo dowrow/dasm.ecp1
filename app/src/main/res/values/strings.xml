@@ -4,13 +4,10 @@
     <string name="botónAñadir">Añadir</string>
     <string name="opcionVaciar">Vaciar Fichero</string>
     <string name="hintTexto">Texto a añadir</string>
-    <string name="txtOnStart">Pulsa para mostrar el contenido del fichero</string>
     <string name="txtFicheroVacio">El fichero está vacío</string>
-    <string name="txtErrorEscribir">No puedo escribir en la memoria externa</string>
 
     <string name="title_activity_ajustes">Ajustes</string>
     <string name="opcionAjustes">Ajustes</string>
-    <string name="pref_header_almacenamiento">Opciones de Almacenamiento</string>
     <string name="opcionAjustesResumen">Opciones relativas al almacenamiento de ficheros</string>
     <string name="pref_title_almacenamiento_sd">Almacenamiento en tarjeta SD</string>
     <string name="pref_description_almacenamiento_sd">Si se activa esta opción se almacenará la información en la tarjeta SD (si está disponible)</string>
