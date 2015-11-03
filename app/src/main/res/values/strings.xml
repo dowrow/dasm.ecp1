@@ -15,5 +15,6 @@
     <string name="pref_title_nombre_fichero">Nombre del fichero</string>
     <string name="pref_description_nombre_fichero">Nombre del fichero en el que se guardará la información</string>
     <string name="pref_title_opciones_almacenamiento">Opciones de almacenamiento</string>
+    <string name="iconoAlmacenamiento">Almacenamiento en SD</string>
 
 </resources>

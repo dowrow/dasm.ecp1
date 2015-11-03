@@ -42,6 +42,7 @@ public class FicherosActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         updatePreferences();
+        invalidateOptionsMenu();
     }
 
     private void updatePreferences() {
@@ -49,9 +50,12 @@ public class FicherosActivity extends AppCompatActivity {
         NOMBRE_FICHERO = prefs.getString(PREF_KEY_NOMBRE_FICHERO, NOMBRE_FICHERO);
         almacenarSD = prefs.getBoolean(PREF_KEY_ALMACENAMIENTO_SD, almacenarSD);
         if (almacenarSD) {
-            RUTA_FICHERO = getExternalFilesDir(null) + "/" + NOMBRE_FICHERO;
+            RUTA_FICHERO = Environment.getExternalStorageDirectory() + "/" + NOMBRE_FICHERO;
+            //RUTA_FICHERO = getExternalFilesDir(null) + "/" + NOMBRE_FICHERO;
+            Log.i("Almacenando", "Almacenando en SD. Ruta: " + RUTA_FICHERO);
         } else {
             RUTA_FICHERO = getFilesDir() + "/" + NOMBRE_FICHERO;
+            Log.i("Almacenando", "Almacenando en memoria interna. Ruta: " + RUTA_FICHERO);
         }
     }
 
@@ -149,7 +153,19 @@ public class FicherosActivity extends AppCompatActivity {
         // Inflador del menú: añade elementos a la action bar
         getMenuInflater().inflate(R.menu.menu, menu);
 
+        updateSettingsIcon(menu);
+
         return true;
+    }
+
+    private void updateSettingsIcon(Menu menu) {
+
+        MenuItem item = menu.findItem(R.id.accionAjustes);
+        if (almacenarSD) {
+            item.setIcon(android.R.drawable.stat_notify_sdcard);
+        } else {
+            item.setIcon(android.R.drawable.stat_notify_sdcard_usb);
+        }
     }
 
     @Override

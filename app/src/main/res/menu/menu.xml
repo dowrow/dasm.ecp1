@@ -13,11 +13,13 @@
         android:orderInCategory="100"
         app:showAsAction="ifRoom|withText"
         />
+
     <item
         android:id="@+id/accionAjustes"
         android:title="@string/opcionAjustes"
-        android:icon="@android:drawable/ic_menu_preferences"
+        android:icon="@android:drawable/stat_notify_sdcard_usb"
         android:orderInCategory="100"
         app:showAsAction="ifRoom|withText"
         />
+
 </menu>
