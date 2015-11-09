@@ -171,7 +171,7 @@ public class FicherosActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.accionVaciar:
-                borrarContenido();
+                vaciarFichero();
                 break;
 
             case R.id.accionAjustes:
@@ -181,9 +181,29 @@ public class FicherosActivity extends AppCompatActivity {
             case R.id.accionEliminarAlgunos:
                 mostrarBorradorFicheros();
                 break;
+
+            case R.id.accionEliminarTodos:
+                eliminarTodo();
+                break;
         }
 
         return true;
+    }
+
+    private void vaciarFichero() {
+        String estadoTarjetaSD = Environment.getExternalStorageState();
+        try {  // Vaciar el fichero
+            if (estadoTarjetaSD.equals(Environment.MEDIA_MOUNTED)) { /** SD card **/
+                FileOutputStream fos = new FileOutputStream(RUTA_FICHERO);
+                fos.close();
+                Log.i("FICHERO", "opción Limpiar -> VACIAR el fichero");
+                lineaTexto.setText(""); // limpio la linea de edición
+                mostrarContenido(contenidoFichero);
+            }
+        } catch (Exception e) {
+            Log.e("FILE I/O", "ERROR: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void mostrarAjustes() {
@@ -199,7 +219,7 @@ public class FicherosActivity extends AppCompatActivity {
     /**
      * Eliminar todos los ficheros del directorio en uso
      */
-    public void borrarContenido() {
+    public void eliminarTodo() {
         GestorFicheros.eliminarDir(Environment.getExternalStorageDirectory() + "");
         GestorFicheros.eliminarDir(getFilesDir() + "");
         mostrarContenido(contenidoFichero);

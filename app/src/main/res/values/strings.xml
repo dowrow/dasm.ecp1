@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sesión 4: Ficheros</string>
+    <string name="app_name">Ficheros</string>
 
     <string name="botónAñadir">Añadir</string>
     <string name="opcionVaciar">Eliminar todo</string>
