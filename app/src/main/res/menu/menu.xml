@@ -7,12 +7,21 @@
     >
 
     <item
-        android:id="@+id/accionVaciar"
-        android:title="@string/opcionVaciar"
+        android:title="@string/opcionEliminar"
         android:icon="@android:drawable/ic_menu_delete"
         android:orderInCategory="100"
         app:showAsAction="ifRoom|withText"
-        />
+        >
+        <menu>
+
+            <item
+                android:id="@+id/accionEliminarAlgunos"
+                android:title="@string/opcionEliminarAlgunos" />
+            <item
+                android:id="@+id/accionVaciar"
+                android:title="@string/opcionVaciar" />
+        </menu>
+    </item>
 
     <item
         android:id="@+id/accionAjustes"

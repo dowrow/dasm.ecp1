@@ -51,7 +51,6 @@ public class FicherosActivity extends AppCompatActivity {
         almacenarSD = prefs.getBoolean(PREF_KEY_ALMACENAMIENTO_SD, almacenarSD);
         if (almacenarSD) {
             RUTA_FICHERO = Environment.getExternalStorageDirectory() + "/" + NOMBRE_FICHERO;
-            //RUTA_FICHERO = getExternalFilesDir(null) + "/" + NOMBRE_FICHERO;
             Log.i("Almacenando", "Almacenando en SD. Ruta: " + RUTA_FICHERO);
         } else {
             RUTA_FICHERO = getFilesDir() + "/" + NOMBRE_FICHERO;
@@ -91,7 +90,6 @@ public class FicherosActivity extends AppCompatActivity {
         String estadoTarjetaSD = Environment.getExternalStorageState();
         try {  // Añadir al fichero
             if (estadoTarjetaSD.equals(Environment.MEDIA_MOUNTED)) {  /** SD card **/
-                // FileOutputStream fos = openFileOutput(NOMBRE_FICHERO, Context.MODE_APPEND);
                 FileOutputStream fos = new FileOutputStream(RUTA_FICHERO, true);
                 fos.write(lineaTexto.getText().toString().getBytes());
                 fos.write('\n');
@@ -179,6 +177,10 @@ public class FicherosActivity extends AppCompatActivity {
             case R.id.accionAjustes:
                 mostrarAjustes();
                 break;
+
+            case R.id.accionEliminarAlgunos:
+                mostrarBorradorFicheros();
+                break;
         }
 
         return true;
@@ -189,25 +191,18 @@ public class FicherosActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void mostrarBorradorFicheros() {
+        Intent intent = new Intent(getApplicationContext(), BorradorFicheros.class);
+        startActivity(intent);
+    }
+
     /**
-     * Vaciar el contenido del fichero, la línea de edición y actualizar
-     *
+     * Eliminar todos los ficheros del directorio en uso
      */
     public void borrarContenido() {
-        String estadoTarjetaSD = Environment.getExternalStorageState();
-        try {  // Vaciar el fichero
-            if (estadoTarjetaSD.equals(Environment.MEDIA_MOUNTED)) { /** SD card **/
-                // FileOutputStream fos = openFileOutput(NOMBRE_FICHERO, Context.MODE_PRIVATE);
-                FileOutputStream fos = new FileOutputStream(RUTA_FICHERO);
-                fos.close();
-                Log.i("FICHERO", "opción Limpiar -> VACIAR el fichero");
-                lineaTexto.setText(""); // limpio la linea de edición
-                mostrarContenido(contenidoFichero);
-            }
-        } catch (Exception e) {
-            Log.e("FILE I/O", "ERROR: " + e.getMessage());
-            e.printStackTrace();
-        }
+        GestorFicheros.eliminarDir(Environment.getExternalStorageDirectory() + "");
+        GestorFicheros.eliminarDir(getFilesDir() + "");
+        mostrarContenido(contenidoFichero);
     }
 
 }

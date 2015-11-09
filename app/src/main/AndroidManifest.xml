@@ -30,6 +30,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="es.upm.miw.ficheros.FicherosActivity" />
         </activity>
+        <activity
+            android:name=".BorradorFicheros"
+            android:label="@string/title_activity_borrador_ficheros"
+            android:parentActivityName=".FicherosActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="es.upm.miw.ficheros.FicherosActivity" />
+        </activity>
     </application>
 
 </manifest>
